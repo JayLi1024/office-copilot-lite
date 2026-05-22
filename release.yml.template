@@ -1,0 +1,69 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stage release zip contents
+        shell: pwsh
+        run: |
+          $release = "release"
+          New-Item -ItemType Directory -Force -Path $release | Out-Null
+          # 顶层 .bat
+          Copy-Item install.bat,uninstall.bat,"重启服务.bat" $release
+          # bin/(注意:helper.exe 由发布者另行 copy,这里只放占位说明)
+          New-Item -ItemType Directory -Force -Path "$release\bin" | Out-Null
+          @"
+          注意:本 zip 不含 bin\helper.exe
+
+          helper.exe 是哈雷彗星 office-helper 的核心二进制,因版权原因不在 GitHub Release 直接分发。
+          请按 README 说明从作者指定渠道获取后,放入 bin\helper.exe。
+          "@ | Out-File "$release\bin\需要先放helper.exe到这里.txt" -Encoding UTF8
+          # scripts/
+          Copy-Item scripts -Destination $release -Recurse
+          # docs/
+          Copy-Item docs -Destination $release -Recurse
+          # 元数据
+          Copy-Item LICENSE,README.md $release
+
+          @"
+          Office Copilot Lite ${{ github.ref_name }}
+          Built: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss UTC')
+          Commit: ${{ github.sha }}
+          "@ | Out-File "$release\VERSION.txt" -Encoding UTF8
+
+          Compress-Archive -Path "$release\*" -DestinationPath "office-copilot-lite-${{ github.ref_name }}.zip" -Force
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            office-copilot-lite-${{ github.ref_name }}.zip
+          body: |
+            ## Office Copilot Lite ${{ github.ref_name }}
+
+            ### Download
+            - `office-copilot-lite-${{ github.ref_name }}.zip` — 完整发布包(不含 helper.exe)
+
+            ### 安装
+
+            1. 下载 zip,解压
+            2. 把 `helper.exe`(原 office-helper)放到 `bin/helper.exe`
+            3. 双击 `install.bat`(UAC 点是)
+            4. 在 Excel/Word/PPT「开始」→「加载项」→「共享文件夹」里加载「Office Copilot Lite」
+            5. 在加载项面板里填:
+               - Gateway URL: 你的 LLM 网关地址(如 `https://api.deepseek.com/anthropic`)
+               - API Key: 你的 sk-... key
+               - Auth Header: `X-Api-Key`
+
+            详细使用说明:`docs/老师使用说明.md`

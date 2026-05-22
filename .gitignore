@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+build/
+dist/
+*.spec
+
+# bridge.exe 由 GH Actions / 本地 PyInstaller 编译,不入仓库
+bin/bridge.exe
+
+# helper.exe 由用户/分发者自行准备,不直接公开提交(版权敏感)
+# 在 release 流程里再 copy 进 zip
+# bin/helper.exe   # ← 取消注释以避免误提交
+
+# 调试 dump
+_last_sse.log
+_last_req.json
+src/_last_sse.log
+src/_last_req.json
+
+# 用户配置(老师机器上独立生成)
+config.json
+src/config.json
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# 安装日志
+install.log
