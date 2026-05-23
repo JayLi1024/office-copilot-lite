@@ -1,4 +1,4 @@
-' Office Copilot Lite - 兜底卸载入口
+' Office Copilot Lite - fallback uninstall launcher
 Set sh = CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
 scriptDir = fso.GetParentFolderName(WScript.ScriptFullName)

@@ -1,6 +1,6 @@
-' Office Copilot Lite - 兜底安装入口
-' 双击此文件,通过 WScript 调用 cmd 启动 install.bat
-' 用途:如果用户机器 .bat 关联被某个编辑器改坏了,可以用这个绕过
+' Office Copilot Lite - fallback install launcher
+' Double-click this file to invoke install.bat via cmd through WScript.
+' Use case: when .bat association is hijacked by some editor (VS Code / Notepad++ / Sublime).
 Set sh = CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
 scriptDir = fso.GetParentFolderName(WScript.ScriptFullName)

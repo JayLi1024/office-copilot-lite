@@ -1,4 +1,4 @@
-# uninstall-core.ps1
+﻿# uninstall-core.ps1
 # 卸载所有改动,逆序回滚
 
 Add-Type -AssemblyName System.Windows.Forms

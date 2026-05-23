@@ -1,4 +1,4 @@
-# register-tasks.ps1
+﻿# register-tasks.ps1
 # 注册一个登录启动任务:helper,wscript 静默跑 vbs,zero 窗口
 
 $installDir = $env:OCL_INSTALL_DIR

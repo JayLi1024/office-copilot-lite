@@ -1,4 +1,4 @@
-# trust-wef.ps1
+﻿# trust-wef.ps1
 # 写 HKCU 注册表把共享路径加进 Office 信任目录,免去手动 GUI 操作
 # 对 Excel/Word/PowerPoint 三个 app 都写
 

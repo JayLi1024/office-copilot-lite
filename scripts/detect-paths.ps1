@@ -1,4 +1,4 @@
-# detect-paths.ps1
+﻿# detect-paths.ps1
 # 自动检测所有路径,设置 OCL_* 环境变量供后续脚本用
 # 老师 0 输入,这一步完全静默
 

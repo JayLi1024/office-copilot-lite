@@ -1,4 +1,4 @@
-# share-wef.ps1
+﻿# share-wef.ps1
 # 把 Wef 目录共享出来,让 Office 信任目录能用 UNC 路径找到 manifest
 # 依赖 detect-paths.ps1 设置的 OCL_WEF_DIR, OCL_SHARE_NAME
 

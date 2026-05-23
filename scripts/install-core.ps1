@@ -1,4 +1,4 @@
-# install-core.ps1
+﻿# install-core.ps1
 # Office Copilot Lite 主安装流程
 # 老师双击 install.bat 后,这个脚本接管做所有事
 # 全程零路径输入,只问 LLM 网关 URL + API Key 两个字段

@@ -1,4 +1,4 @@
-# rebrand-manifest.ps1
+﻿# rebrand-manifest.ps1
 # 把 helper.exe install 部署的 manifest.xml 改成 Office Copilot Lite 品牌
 # 不改 GUID/URL/Hosts(那些 Office 用来识别加载项的)
 
